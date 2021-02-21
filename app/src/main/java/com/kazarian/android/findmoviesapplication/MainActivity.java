@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import Omdbapi_Movie_info_model.OmdbapiMovieInfoModel;
 import cz.msebera.android.httpclient.Header;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerViewClickInterface {
 
     ArrayList<String> fnames, fjenres, fyears, fimages;
     ArrayList<Double> fimdbids;
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                             myRecycler.setLayoutManager(myManager);
 
                             //i shude make an adapter for recycler view here
-                            FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages);
+                            FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages, this);
                             myRecycler.setAdapter(adapter);
 
                         }
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 myRecycler.setLayoutManager(myManager);
 
                 //i shude make an adapter for recycler view here
-                FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages);
+                FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages, this);
                 myRecycler.setAdapter(adapter);
 
 
@@ -163,5 +163,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public Void onItemClick(int position) {
+        return null;
     }
 }

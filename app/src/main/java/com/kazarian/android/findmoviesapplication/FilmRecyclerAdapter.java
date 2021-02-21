@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -15,16 +16,26 @@ public class FilmRecyclerAdapter extends RecyclerView.Adapter<FilmViewHolder> {
 
     ArrayList<String> fname, fjenre, fyear, fimage;
     ArrayList<Double> fimdbid;
+    private RecyclerViewClickInterface mRecyclerViewClickInterface;
 
 
-    public FilmRecyclerAdapter(ArrayList<String> fnames, ArrayList<String> fyears, ArrayList<String> fjenres, ArrayList<String> fimages){
+    public FilmRecyclerAdapter(ArrayList<String> fnames,
+                               ArrayList<String> fyears,
+                               ArrayList<String> fjenres,
+                               ArrayList<String> fimages,
+                               RecyclerViewClickInterface recyclerViewClickInterface){
         this.fname = fnames;
         this.fyear = fyears;
         this.fjenre = fjenres;
         this.fimage = fimages;
+        this.mRecyclerViewClickInterface = recyclerViewClickInterface;
 
     }
 
+   /* public FilmRecyclerAdapter(ArrayList<String> fnames, ArrayList<String> fyears, ArrayList<String> fjenres, ArrayList<String> fimages, RecyclerViewClickInterface recyclerViewClickInterface, JsonHttpResponseHandler jsonHttpResponseHandler) {
+
+    }
+*/
     @NonNull
     @Override
     public FilmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
