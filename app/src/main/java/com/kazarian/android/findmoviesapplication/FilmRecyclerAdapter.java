@@ -22,13 +22,13 @@ public class FilmRecyclerAdapter extends RecyclerView.Adapter<FilmViewHolder> {
     public FilmRecyclerAdapter(ArrayList<String> fnames,
                                ArrayList<String> fyears,
                                ArrayList<String> fjenres,
-                               ArrayList<String> fimages,
-                               RecyclerViewClickInterface recyclerViewClickInterface){
+                               ArrayList<String> fimages/*,
+                               RecyclerViewClickInterface recyclerViewClickInterface*/){
         this.fname = fnames;
         this.fyear = fyears;
         this.fjenre = fjenres;
         this.fimage = fimages;
-        this.mRecyclerViewClickInterface = recyclerViewClickInterface;
+        //this.mRecyclerViewClickInterface = recyclerViewClickInterface;
 
     }
 

@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
                             myRecycler.setLayoutManager(myManager);
 
                             //i shude make an adapter for recycler view here
-                            FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages, this);
+                            FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages);
                             myRecycler.setAdapter(adapter);
 
                         }
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
                 myRecycler.setLayoutManager(myManager);
 
                 //i shude make an adapter for recycler view here
-                FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages, this);
+                FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages);
                 myRecycler.setAdapter(adapter);
 
 
