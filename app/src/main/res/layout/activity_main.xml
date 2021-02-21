@@ -5,13 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <EditText
@@ -24,16 +24,17 @@
             android:textSize="25sp"
             android:inputType="textAutoCorrect"
             android:background="@color/mylightgray"
-            android:padding="2dp"
+            android:padding="5dp"
             android:layout_width="0dp" />
 
 
         <ImageView
+            android:id="@+id/imgSearch"
             android:layout_weight="1"
             android:scaleType="fitXY"
-            android:layout_height= "37dp"
+            android:layout_height="43dp"
             android:src="@drawable/searchicon"
-            android:padding="2dp"
+            android:padding="5dp"
             android:background="@color/mylightgray"
             android:layout_width="0dp" />
     </LinearLayout>
