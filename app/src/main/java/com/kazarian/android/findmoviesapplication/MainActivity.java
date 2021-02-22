@@ -51,7 +51,55 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         //<----------- url omdb api bayad bashad
         AsyncHttpClient client = new AsyncHttpClient();
 
-        //------making the url string for connecting to omdb site ------
+
+        //------receiving json code for url for the first time (search fase = current)------------------------------------
+        client.get(myUrl, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                //-----mapping json code to Gson class----------------
+                Gson gson = new Gson();
+                OmdbapiMovieInfoModel model = gson.fromJson(response.toString(), OmdbapiMovieInfoModel.class);
+                //-----extracting data from Gson class----------------
+
+                fnames = new ArrayList<>();
+                fyears = new ArrayList<>();
+                //fimdbids = new ArrayList<>();
+                fjenres = new ArrayList<>();
+                fimages = new ArrayList<>();
+
+                for (int i = 0; i< model.getSearch().size(); i++){
+                    fnames.add(model.getSearch().get(i).getTitle());
+                    fyears.add(model.getSearch().get(i).getYear());
+                    //fimdbids.add(model.getSearch().get(i).getImdbID());
+                    fjenres.add(model.getSearch().get(i).getType());
+                    fimages.add(model.getSearch().get(i).getPoster());
+                }
+
+                System.out.println(response.toString());
+
+                //-----preparing to show data in recycler View-----------
+                RecyclerView myRecycler = findViewById(R.id.recycler);
+
+                LinearLayoutManager myManager = new LinearLayoutManager(MainActivity.this, RecyclerView.VERTICAL, false);
+                myRecycler.setLayoutManager(myManager);
+
+                //i shude make an adapter for recycler view here
+                FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages);
+                myRecycler.setAdapter(adapter);
+
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(MainActivity.this, "Connection Failed!", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        //------making the url string regarding the search fase for connecting to omdb site ------
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,59 +162,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
         });
 
 
-        //------receiving json code------------------------------------
-        client.get(myUrl, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                //-----mapping json code to Gson class----------------
-                Gson gson = new Gson();
-                OmdbapiMovieInfoModel model = gson.fromJson(response.toString(), OmdbapiMovieInfoModel.class);
-                //-----extracting data from Gson class----------------
-
-                fnames = new ArrayList<>();
-                fyears = new ArrayList<>();
-                //fimdbids = new ArrayList<>();
-                fjenres = new ArrayList<>();
-                fimages = new ArrayList<>();
-
-                for (int i = 0; i< model.getSearch().size(); i++){
-                    fnames.add(model.getSearch().get(i).getTitle());
-                    fyears.add(model.getSearch().get(i).getYear());
-                    //fimdbids.add(model.getSearch().get(i).getImdbID());
-                    fjenres.add(model.getSearch().get(i).getType());
-                    fimages.add(model.getSearch().get(i).getPoster());
-                }
-
-                System.out.println(response.toString());
-
-                //-----preparing to show data in recycler View-----------
-                RecyclerView myRecycler = findViewById(R.id.recycler);
-
-                LinearLayoutManager myManager = new LinearLayoutManager(MainActivity.this, RecyclerView.VERTICAL, false);
-                myRecycler.setLayoutManager(myManager);
-
-                //i shude make an adapter for recycler view here
-                FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages);
-                myRecycler.setAdapter(adapter);
-
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-            }
-
-
-        });
-
-
-
     }
+
 
     @Override
     public Void onItemClick(int position) {
         return null;
     }
+
 }
