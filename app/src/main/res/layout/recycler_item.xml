@@ -6,12 +6,14 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/llItemlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <!--    F is for Film-->
         <ImageView
+            android:tag="2"
             android:id="@+id/imgFImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -25,6 +27,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:tag="1"
                 android:id="@+id/txtFName"
                 android:text="gone with the wind"
                 android:padding="2dp"

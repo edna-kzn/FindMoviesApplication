@@ -27,7 +27,7 @@ import cz.msebera.android.httpclient.Header;
 public class MainActivity extends AppCompatActivity implements RecyclerViewClickInterface {
 
     ArrayList<String> fnames, fjenres, fyears, fimages;
-    ArrayList<Double> fimdbids;
+    ArrayList<String> fimdbids;
 
     //Title (in OmdbapiMovieInfoModel) = FName
     //Year (in OmdbapiMovieInfoModel) = FYear
@@ -64,14 +64,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
 
                 fnames = new ArrayList<>();
                 fyears = new ArrayList<>();
-                //fimdbids = new ArrayList<>();
+                fimdbids = new ArrayList<>();
                 fjenres = new ArrayList<>();
                 fimages = new ArrayList<>();
 
                 for (int i = 0; i< model.getSearch().size(); i++){
                     fnames.add(model.getSearch().get(i).getTitle());
                     fyears.add(model.getSearch().get(i).getYear());
-                    //fimdbids.add(model.getSearch().get(i).getImdbID());
+                    fimdbids.add(model.getSearch().get(i).getImdbID());
                     fjenres.add(model.getSearch().get(i).getType());
                     fimages.add(model.getSearch().get(i).getPoster());
                 }
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
                 myRecycler.setLayoutManager(myManager);
 
                 //i shude make an adapter for recycler view here
-                FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages);
+                FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages, fimdbids);
                 myRecycler.setAdapter(adapter);
 
 
@@ -121,14 +121,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
 
                             fnames = new ArrayList<>();
                             fyears = new ArrayList<>();
-                            //fimdbids = new ArrayList<>();
+                            fimdbids = new ArrayList<>();
                             fjenres = new ArrayList<>();
                             fimages = new ArrayList<>();
 
                             for (int i = 0; i< model.getSearch().size(); i++){
                                 fnames.add(model.getSearch().get(i).getTitle());
                                 fyears.add(model.getSearch().get(i).getYear());
-                                //fimdbids.add(model.getSearch().get(i).getImdbID());
+                                fimdbids.add(model.getSearch().get(i).getImdbID());
                                 fjenres.add(model.getSearch().get(i).getType());
                                 fimages.add(model.getSearch().get(i).getPoster());
                             }
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
                             myRecycler.setLayoutManager(myManager);
 
                             //i shude make an adapter for recycler view here
-                            FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages);
+                            FilmRecyclerAdapter adapter = new FilmRecyclerAdapter(fnames, fyears, fjenres, fimages, fimdbids);
                             myRecycler.setAdapter(adapter);
 
                         }
@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                             super.onFailure(statusCode, headers, throwable, errorResponse);
+                            Toast.makeText(MainActivity.this, "Connection Failed!", Toast.LENGTH_SHORT).show();
                         }
                     });
 
