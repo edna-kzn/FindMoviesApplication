@@ -92,6 +92,7 @@
         </LinearLayout>
 
     <Button
+        android:id="@+id/btnSave"
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:layout_width="wrap_content"

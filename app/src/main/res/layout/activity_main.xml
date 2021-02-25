@@ -30,13 +30,26 @@
 
         <ImageView
             android:id="@+id/imgSearch"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:scaleType="fitXY"
             android:layout_height="43dp"
             android:src="@drawable/searchicon"
             android:padding="5dp"
+            android:layout_margin="3dp"
             android:background="@color/mylightgray"
             android:layout_width="0dp" />
+
+        <ImageView
+            android:id="@+id/imgOfflinedata"
+            android:layout_weight="2"
+            android:scaleType="fitXY"
+            android:layout_height="43dp"
+            android:src="@drawable/offline_data_icon"
+            android:layout_margin="3dp"
+            android:padding="5dp"
+            android:background="@color/mylightgray"
+            android:layout_width="0dp" />
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

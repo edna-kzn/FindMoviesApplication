@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,10 +36,13 @@ public class RecyclerItemDetailActivity extends AppCompatActivity {
         TextView dcountry = findViewById(R.id.txtFCountryindetail);
         ImageView dimage = findViewById(R.id.imgFImageindetail);
 
+        String Image_link = "";  //keeps the image webaddress
+        Button btnsave = findViewById(R.id.btnSave);
+
 
         //-------connecting to site omdb api-------start---------------
         //----------- getting the selected movie id from recycler item ------------------
-        String dfid;
+        String dfid;   //omdbID
         Intent intent = getIntent();
         dfid = intent.getStringExtra("ifId");
         String Url_search_by_id;
@@ -68,6 +73,7 @@ public class RecyclerItemDetailActivity extends AppCompatActivity {
                 ddirector.setText("Director: " + model2.getDirector());
                 dcountry.setText("Made in: " + model2.getCountry());
                 Picasso.get().load("" + model2.getPoster()).into(dimage);
+                String Image_link = model2.getPoster().toString();
 
 
             }
@@ -76,6 +82,27 @@ public class RecyclerItemDetailActivity extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 Toast.makeText(RecyclerItemDetailActivity.this, "Connection Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //------------------- save button clicked---------------------
+        SqlLiteHelper helper = new SqlLiteHelper(RecyclerItemDetailActivity.this, "Movies", null, 1);
+        btnsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //----save item to table------call insert into metod in Sqllitehelper class ----
+                String iOmdbId = dfid;
+                String iTitle = dname.getText().toString();
+                String iGenre = dgenre.getText().toString();
+                String iYear = dyear.getText().toString();
+                String iDirector = ddirector.getText().toString();
+                String iCountry = dcountry.getText().toString();
+                String iimage = Image_link;
+
+                helper.insertIntoMoviesTable(iOmdbId, iTitle, iGenre, iYear, iDirector, iCountry, iimage);
+
+                Toast.makeText(RecyclerItemDetailActivity.this, "Movie is Saved!", Toast.LENGTH_SHORT).show();
+
             }
         });
 
