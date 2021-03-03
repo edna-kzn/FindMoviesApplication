@@ -11,8 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FindMoviesApplication">
-        <activity android:name=".TestRecyclerFromDbActivity">
-        </activity>
         <activity android:name=".RecyclerItemDetailActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

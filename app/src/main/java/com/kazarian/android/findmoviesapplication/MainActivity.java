@@ -28,7 +28,7 @@ import Omdbapi_Movie_info_moldel_2_singleresult.OmdbapiMovieInfoModel3;
 import cz.msebera.android.httpclient.Header;
 
 
-public class MainActivity extends AppCompatActivity implements RecyclerViewClickInterface {
+public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> fnames, fjenres, fyears, fimages;
     ArrayList<String> fimdbids;
@@ -107,6 +107,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
             @Override
             public void onClick(View v) {
                 myUrl = "http://www.omdbapi.com/?s=";
+                if (edtSearch.getText().length() == 0) {
+                    Toast.makeText(MainActivity.this, "Search phase is empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String changablefase = edtSearch.getText().toString();   //using this variable to make myUrl complete with adding edtSearch
 
                 if (changablefase.length() != 0) {
@@ -206,9 +210,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewClick
     }
 
 
-    @Override
-    public Void onItemClick(int position) {
-        return null;
-    }
+
 
 }
