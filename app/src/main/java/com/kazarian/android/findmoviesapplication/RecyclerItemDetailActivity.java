@@ -35,8 +35,10 @@ public class RecyclerItemDetailActivity extends AppCompatActivity {
         TextView ddirector = findViewById(R.id.txtFDirectorindetail);
         TextView dcountry = findViewById(R.id.txtFCountryindetail);
         ImageView dimage = findViewById(R.id.imgFImageindetail);
+        TextView dImage_link = findViewById(R.id.txtFImageLink);  //this textview is invisible it just keeps the image link data (web address)
+        //String Image_link = "";  //keeps the image webaddress
 
-        String Image_link = "";  //keeps the image webaddress
+
         Button btnsave = findViewById(R.id.btnSave);
 
 
@@ -67,13 +69,13 @@ public class RecyclerItemDetailActivity extends AppCompatActivity {
                 OmdbapiMovieInfoModel2 model2 = gson.fromJson(response.toString(), OmdbapiMovieInfoModel2.class);
 
                 //----- por kardan textboxhaye rooye form detail------
-                dname.setText("Title: " + model2.getTitle());
-                dgenre.setText("Genre: " + model2.getGenre());
-                dyear.setText("Produced in: " + model2.getYear());
-                ddirector.setText("Director: " + model2.getDirector());
-                dcountry.setText("Made in: " + model2.getCountry());
-                Picasso.get().load("" + model2.getPoster()).into(dimage);
-                String Image_link = model2.getPoster().toString();
+                dname.setText(model2.getTitle());
+                dgenre.setText(model2.getGenre());
+                dyear.setText(model2.getYear());
+                ddirector.setText(model2.getDirector());
+                dcountry.setText(model2.getCountry());
+                Picasso.get().load(model2.getPoster()).into(dimage);
+                dImage_link.setText(model2.getPoster().toString());
 
 
             }
@@ -97,12 +99,11 @@ public class RecyclerItemDetailActivity extends AppCompatActivity {
                 String iYear = dyear.getText().toString();
                 String iDirector = ddirector.getText().toString();
                 String iCountry = dcountry.getText().toString();
-                String iimage = Image_link;
+                String iimage = dImage_link.getText().toString();
 
                 helper.insertIntoMoviesTable(iOmdbId, iTitle, iGenre, iYear, iDirector, iCountry, iimage);
 
                 Toast.makeText(RecyclerItemDetailActivity.this, "Movie is Saved!", Toast.LENGTH_SHORT).show();
-
             }
         });
 
